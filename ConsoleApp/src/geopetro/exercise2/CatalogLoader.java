@@ -40,8 +40,13 @@ public class CatalogLoader {
 					|| !anItem.containsKey("MODEL_NAME")) {
 				System.out.println("Item missing required information found. Item ignored!");
 			} else {
-				int anItemCat = Integer.parseInt(anItem.get("ITEM_CAT"));
-				int anItemSubCat = Integer.parseInt(anItem.get("ITEM_SUB_CAT"));
+				int anItemCat = Integer.valueOf(getIntegerAttrValue(anItem,"ITEM_CAT",0));
+				int anItemSubCat = Integer.valueOf(getIntegerAttrValue(anItem,"ITEM_SUB_CAT",0));
+				
+				if(anItemCat==0 || anItemSubCat==0) {
+					System.out.println("Item not properly categorized found. Item ignored!");
+					continue;
+				}
 				
 				switch(anItemCat) {
 					case 1:
@@ -49,50 +54,50 @@ public class CatalogLoader {
 							case 1:
 								TV aTV = new TV(anItem.get("CODE"),
 												anItem.get("MODEL_NAME"),
-												Integer.valueOf(getAttributeValue(anItem,"MODEL_YEAR","1970")),
-												getAttributeValue(anItem,"MANUFACTURER","N/A"),
-												Double.valueOf(getAttributeValue(anItem,"PRICE","0.0")),
+												getIntegerAttrValue(anItem,"MODEL_YEAR",1970),
+												getStringAttrValue(anItem,"MANUFACTURER","N/A"),
+												getDoubleAttrValue(anItem,"PRICE",0.0),
 												Integer.valueOf(anItemCat),
 												Integer.valueOf(anItemSubCat),
-												Double.valueOf(getAttributeValue(anItem,"DISCOUNT","0.0")),
-												getAttributeValue(anItem,"ITEM_TYPE","N/A"),
-												getAttributeValue(anItem,"SCREEN_SIZE","N/A"),
-												getAttributeValue(anItem,"RESOLUTION","N/A"),
-												getTokens(getAttributeValue(anItem,"PORTS","N/A")));
+												getDoubleAttrValue(anItem,"DISCOUNT",0.0),
+												getStringAttrValue(anItem,"ITEM_TYPE","N/A"),
+												getStringAttrValue(anItem,"SCREEN_SIZE","N/A"),
+												getStringAttrValue(anItem,"RESOLUTION","N/A"),
+												getTokens(getStringAttrValue(anItem,"PORTS","N/A")));
 								
-								productsCatalog.put(aTV, Integer.valueOf(getAttributeValue(anItem,"QUANTITY","0")));
+								productsCatalog.put(aTV, getIntegerAttrValue(anItem,"QUANTITY",0));
 								break;
 							case 2:
 								Player aPlayer = new Player(anItem.get("CODE"),
 															anItem.get("MODEL_NAME"),
-															Integer.valueOf(getAttributeValue(anItem,"MODEL_YEAR","1970")),
-															getAttributeValue(anItem,"MANUFACTURER","N/A"),
-															Double.valueOf(getAttributeValue(anItem,"PRICE","0.0")),
+															getIntegerAttrValue(anItem,"MODEL_YEAR",1970),
+															getStringAttrValue(anItem,"MANUFACTURER","N/A"),
+															getDoubleAttrValue(anItem,"PRICE",0.0),
 															Integer.valueOf(anItemCat),
 															Integer.valueOf(anItemSubCat),
-															Double.valueOf(getAttributeValue(anItem,"DISCOUNT","0.0")),
-															getAttributeValue(anItem,"ITEM_TYPE","N/A"),
-															getAttributeValue(anItem,"RESOLUTION","N/A"),
-															getTokens(getAttributeValue(anItem,"MEDIA_FORMAT","N/A")));
+															getDoubleAttrValue(anItem,"DISCOUNT",0.0),
+															getStringAttrValue(anItem,"ITEM_TYPE","N/A"),
+															getStringAttrValue(anItem,"RESOLUTION","N/A"),
+															getTokens(getStringAttrValue(anItem,"MEDIA_FORMAT","N/A")));
 								
-								productsCatalog.put(aPlayer, Integer.valueOf(getAttributeValue(anItem,"QUANTITY","0")));
+								productsCatalog.put(aPlayer, getIntegerAttrValue(anItem,"QUANTITY",0));
 								break;
 							case 3:
 								Camera aCamera = new Camera(anItem.get("CODE"),
 															anItem.get("MODEL_NAME"),
-															Integer.valueOf(getAttributeValue(anItem,"MODEL_YEAR","1970")),
-															getAttributeValue(anItem,"MANUFACTURER","N/A"),
-															Double.valueOf(getAttributeValue(anItem,"PRICE","0.0")),
+															getIntegerAttrValue(anItem,"MODEL_YEAR",1970),
+															getStringAttrValue(anItem,"MANUFACTURER","N/A"),
+															getDoubleAttrValue(anItem,"PRICE",0.0),
 															Integer.valueOf(anItemCat),
 															Integer.valueOf(anItemSubCat),
-															Double.valueOf(getAttributeValue(anItem,"DISCOUNT","0.0")),
-															getAttributeValue(anItem,"ITEM_TYPE","N/A"),
-															getAttributeValue(anItem,"MEGAPIXEL","N/A"),
-															getAttributeValue(anItem,"OPTICAL_ZOOM","N/A"),
-															getAttributeValue(anItem,"DIGITAL_ZOOM","N/A"),
-															getAttributeValue(anItem,"SCREEN_SIZE","N/A"));
+															getDoubleAttrValue(anItem,"DISCOUNT",0.0),
+															getStringAttrValue(anItem,"ITEM_TYPE","N/A"),
+															getStringAttrValue(anItem,"MEGAPIXEL","N/A"),
+															getStringAttrValue(anItem,"OPTICAL_ZOOM","N/A"),
+															getStringAttrValue(anItem,"DIGITAL_ZOOM","N/A"),
+															getStringAttrValue(anItem,"SCREEN_SIZE","N/A"));
 								
-								productsCatalog.put(aCamera, Integer.valueOf(getAttributeValue(anItem,"QUANTITY","0")));
+								productsCatalog.put(aCamera, getIntegerAttrValue(anItem,"QUANTITY",0));
 								break;
 						}
 						break;
@@ -101,19 +106,19 @@ public class CatalogLoader {
 							case 1:
 								Console aConsole = new Console(anItem.get("CODE"),
 																anItem.get("MODEL_NAME"),
-																Integer.valueOf(getAttributeValue(anItem,"MODEL_YEAR","1970")),
-																getAttributeValue(anItem,"MANUFACTURER","N/A"),
-																Double.valueOf(getAttributeValue(anItem,"PRICE","0.0")),
+																getIntegerAttrValue(anItem,"MODEL_YEAR",1970),
+																getStringAttrValue(anItem,"MANUFACTURER","N/A"),
+																getDoubleAttrValue(anItem,"PRICE",0.0),
 																Integer.valueOf(anItemCat),
 																Integer.valueOf(anItemSubCat),
-																Double.valueOf(getAttributeValue(anItem,"DISCOUNT","0.0")),
-																getAttributeValue(anItem,"ITEM_TYPE","N/A"),
-																getAttributeValue(anItem,"PROCESSOR","N/A"),
-																getAttributeValue(anItem,"GRAPHICS","N/A"),
-																getAttributeValue(anItem,"SOUND","N/A"),
-																getAttributeValue(anItem,"STORAGE_CAPACITY","N/A"));
+																getDoubleAttrValue(anItem,"DISCOUNT",0.0),
+																getStringAttrValue(anItem,"ITEM_TYPE","N/A"),
+																getStringAttrValue(anItem,"PROCESSOR","N/A"),
+																getStringAttrValue(anItem,"GRAPHICS","N/A"),
+																getStringAttrValue(anItem,"SOUND","N/A"),
+																getStringAttrValue(anItem,"STORAGE_CAPACITY","N/A"));
 								
-								productsCatalog.put(aConsole, Integer.valueOf(getAttributeValue(anItem,"QUANTITY","0")));
+								productsCatalog.put(aConsole, getIntegerAttrValue(anItem,"QUANTITY",0));
 								break;
 						}
 						break;
@@ -122,33 +127,33 @@ public class CatalogLoader {
 							case 1:
 								Fridge aFridge = new Fridge(anItem.get("CODE"),
 															anItem.get("MODEL_NAME"),
-															Integer.valueOf(getAttributeValue(anItem,"MODEL_YEAR","1970")),
-															getAttributeValue(anItem,"MANUFACTURER","N/A"),
-															Double.valueOf(getAttributeValue(anItem,"PRICE","0.0")),
+															getIntegerAttrValue(anItem,"MODEL_YEAR",1970),
+															getStringAttrValue(anItem,"MANUFACTURER","N/A"),
+															getDoubleAttrValue(anItem,"PRICE",0.0),
 															Integer.valueOf(anItemCat),
 															Integer.valueOf(anItemSubCat),
-															Double.valueOf(getAttributeValue(anItem,"DISCOUNT","0.0")),
-															getAttributeValue(anItem,"ITEM_TYPE","N/A"),
-															getAttributeValue(anItem,"ENERGY_CLASS","N/A"),
-															getAttributeValue(anItem,"REFRIGERATOR_CAPACITY","N/A"),
-															getAttributeValue(anItem,"FREEZER_CAPACITY","N/A"));
+															getDoubleAttrValue(anItem,"DISCOUNT",0.0),
+															getStringAttrValue(anItem,"ITEM_TYPE","N/A"),
+															getStringAttrValue(anItem,"ENERGY_CLASS","N/A"),
+															getStringAttrValue(anItem,"REFRIGERATOR_CAPACITY","N/A"),
+															getStringAttrValue(anItem,"FREEZER_CAPACITY","N/A"));
 								
-								productsCatalog.put(aFridge, Integer.valueOf(getAttributeValue(anItem,"QUANTITY","0")));
+								productsCatalog.put(aFridge, getIntegerAttrValue(anItem,"QUANTITY",0));
 								break;
 							case 2:
 								WashingMachine aWashingMachine = new WashingMachine(anItem.get("CODE"),
 																					anItem.get("MODEL_NAME"),
-																					Integer.valueOf(getAttributeValue(anItem,"MODEL_YEAR","1970")),
-																					getAttributeValue(anItem,"MANUFACTURER","N/A"),
-																					Double.valueOf(getAttributeValue(anItem,"PRICE","0.0")),
+																					getIntegerAttrValue(anItem,"MODEL_YEAR",1970),
+																					getStringAttrValue(anItem,"MANUFACTURER","N/A"),
+																					getDoubleAttrValue(anItem,"PRICE",0.0),
 																					Integer.valueOf(anItemCat),
 																					Integer.valueOf(anItemSubCat),
-																					Double.valueOf(getAttributeValue(anItem,"DISCOUNT","0.0")),
-																					getAttributeValue(anItem,"ENERGY_CLASS","N/A"),
-																					getAttributeValue(anItem,"CAPACITY","N/A"),
-																					getAttributeValue(anItem,"SPIN_SPEED","N/A"));
+																					getDoubleAttrValue(anItem,"DISCOUNT",0.0),
+																					getStringAttrValue(anItem,"ENERGY_CLASS","N/A"),
+																					getStringAttrValue(anItem,"CAPACITY","N/A"),
+																					getStringAttrValue(anItem,"SPIN_SPEED","N/A"));
 								
-								productsCatalog.put(aWashingMachine, Integer.valueOf(getAttributeValue(anItem,"QUANTITY","0")));
+								productsCatalog.put(aWashingMachine, getIntegerAttrValue(anItem,"QUANTITY",0));
 								break;
 						}
 						break;
@@ -182,7 +187,7 @@ public class CatalogLoader {
 				System.out.println("Order device not included in the products catalog. Order ignored!");
 			} else {
 				//Adjusting the next available order code as necessary
-				Integer thisOrderCode = Integer.valueOf(anOrder.get("ORDER_CODE"));
+				Integer thisOrderCode = getIntegerAttrValue(anOrder,"ORDER_CODE",0);
 				if(thisOrderCode > orderCode) {
 					orderCode = thisOrderCode+1;
 				}
@@ -192,9 +197,9 @@ public class CatalogLoader {
 									anOrder.get("CUSTOMER_NAME"),
 									anOrder.get("CUSTOMER_SURNAME"),
 									anOrder.get("CUSTOMER_PHONE"),
-									stringToDate(anOrder.get("ORDER_DATE")),
-									stringToDate(anOrder.get("ORDER_ETA")),
-									Double.valueOf(anOrder.get("ORDER_COST")),
+									getDateAttrValue(anOrder,"ORDER_DATE",new Date()),
+									getDateAttrValue(anOrder,"ORDER_ETA",new Date()),
+									getDoubleAttrValue(anOrder,"ORDER_COST",0.0),
 									anOrder.get("ORDER_STATUS"));
 				
 				ordersCatalog.add(o);
@@ -217,7 +222,7 @@ public class CatalogLoader {
 				System.out.println("Sale device not included in the products catalog. Sale ignored!");
 			} else {
 				//Adjusting the next available sale code as necessary
-				Integer thisSaleCode = Integer.valueOf(aSale.get("SALE_CODE"));
+				Integer thisSaleCode = getIntegerAttrValue(aSale,"SALE_CODE",0);
 				if(thisSaleCode > saleCode) {
 					saleCode = thisSaleCode+1;
 				}
@@ -227,8 +232,8 @@ public class CatalogLoader {
 									aSale.get("CUSTOMER_NAME"),
 									aSale.get("CUSTOMER_SURNAME"),
 									aSale.get("CUSTOMER_PHONE"),
-									stringToDate(aSale.get("SALE_DATE")),
-									Double.valueOf(aSale.get("SALE_COST")));
+									getDateAttrValue(aSale,"SALE_DATE",new Date()),
+									getDoubleAttrValue(aSale,"SALE_COST",0.0));
 				
 				salesCatalog.add(s);
 			}
@@ -291,7 +296,7 @@ public class CatalogLoader {
 					}
 				} else if(cursorInsideElement) {
 					String[] attributeKV = line.split("\\p{Blank}+", 2); //Find the first space or tab and split the string around that.
-					anElement.put(attributeKV[0].toUpperCase(),attributeKV[1]); //Store the key (attribute tag) in uppercase to overcome case differences.
+					anElement.put(attributeKV[0].toUpperCase(),attributeKV[1]); //Store the key (attribute tag) in upper case to overcome case differences.
 				}
 				
 				line = is.readLine();
@@ -319,9 +324,54 @@ public class CatalogLoader {
 		return clone;
 	}
 	
-	public static String getAttributeValue(Hashtable<String, String> anElement, String attributeKey, String defaultValue) {
-		if(anElement.containsKey(attributeKey)) {
-			return anElement.get(attributeKey);
+	public static String getStringAttrValue(Hashtable<String, String> anElement, String attrKey, String defaultValue) {
+		if(anElement.containsKey(attrKey)) {
+			return anElement.get(attrKey);
+		}
+		
+		return defaultValue;
+	}
+	
+	public static Integer getIntegerAttrValue(Hashtable<String, String> anElement, String attrKey, Integer defaultValue) {
+		if(anElement.containsKey(attrKey)) {
+			String attrValue = anElement.get(attrKey);
+			
+			if(attrValue.matches("^\\d+$")) {
+				return Integer.valueOf(attrValue);
+			}
+			else {
+				return defaultValue;
+			}
+		}
+		
+		return defaultValue;
+	}
+	
+	public static Double getDoubleAttrValue(Hashtable<String, String> anElement, String attrKey, Double defaultValue) {
+		if(anElement.containsKey(attrKey)) {
+			String attrValue = anElement.get(attrKey);
+			
+			if(attrValue.matches("^\\d+\\.\\d{1,2}$")) {
+				return Double.valueOf(attrValue);
+			}
+			else {
+				return defaultValue;
+			}
+		}
+		
+		return defaultValue;
+	}
+	
+	public static Date getDateAttrValue(Hashtable<String, String> anElement, String attrKey, Date defaultValue) {
+		if(anElement.containsKey(attrKey)) {
+			String attrValue = anElement.get(attrKey);
+			
+			if(attrValue.matches("^([1-9]{1}|1\\d{1}|2\\d{1}|3[01]{1})\\.([1-9]{1}|1[012]{1})\\.2[0-9]{3}$")) {
+				return stringToDate(attrValue);
+			}
+			else {
+				return defaultValue;
+			}
 		}
 		
 		return defaultValue;
