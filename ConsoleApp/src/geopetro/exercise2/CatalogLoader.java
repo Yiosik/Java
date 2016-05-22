@@ -188,6 +188,12 @@ public class CatalogLoader {
 			} else {
 				//Adjusting the next available order code as necessary
 				Integer thisOrderCode = getIntegerAttrValue(anOrder,"ORDER_CODE",0);
+				
+				if(thisOrderCode == 0) {
+					System.out.println("Order with invalid code found. Order ignored!");
+					continue;
+				}
+				
 				if(thisOrderCode > orderCode) {
 					orderCode = thisOrderCode+1;
 				}
@@ -223,6 +229,12 @@ public class CatalogLoader {
 			} else {
 				//Adjusting the next available sale code as necessary
 				Integer thisSaleCode = getIntegerAttrValue(aSale,"SALE_CODE",0);
+				
+				if(thisSaleCode == 0) {
+					System.out.println("Sale with invalid code found. Sale ignored!");
+					continue;
+				}
+				
 				if(thisSaleCode > saleCode) {
 					saleCode = thisSaleCode+1;
 				}
