@@ -10,9 +10,9 @@ import java.util.StringTokenizer;
 
 public class EShopDemo {
 	
-	private static final String productsFile = "/Users/geo/Development/Repos/Java/ConsoleApp/src/geopetro/exercise2/Products.txt";
-	private static final String ordersFile = "/Users/geo/Development/Repos/Java/ConsoleApp/src/geopetro/exercise2/Orders.txt";
-	private static final String salesFile = "/Users/geo/Development/Repos/Java/ConsoleApp/src/geopetro/exercise2/Sales.txt";
+	private static final String productsFile = "E:\\Development\\Repos\\Java\\ConsoleApp\\src\\geopetro\\exercise2\\Products.txt";
+	private static final String ordersFile = "E:\\Development\\Repos\\Java\\ConsoleApp\\src\\geopetro\\exercise2\\Orders.txt";
+	private static final String salesFile = "E:\\Development\\Repos\\Java\\ConsoleApp\\src\\geopetro\\exercise2\\Sales.txt";
 	
 	public static void main(String[] args) {
 		//Initialize the three catalogs
