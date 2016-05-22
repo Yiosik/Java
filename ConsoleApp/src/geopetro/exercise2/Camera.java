@@ -1,3 +1,4 @@
+//My change
 package geopetro.exercise2;
 
 public class Camera extends Device {
