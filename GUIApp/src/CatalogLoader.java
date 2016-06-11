@@ -188,7 +188,7 @@ public class CatalogLoader {
 			}
 		}
 		
-		JOptionPane.showMessageDialog(null,"Load Succesfull!");
+		JOptionPane.showMessageDialog(null,"Products Catalog Loaded");
 	}
 	
 	public static void loadOrdersCatalog(String filePath){
@@ -230,7 +230,7 @@ public class CatalogLoader {
 			}
 		}
 		
-		JOptionPane.showMessageDialog(null,"Load Succesfull!");
+		JOptionPane.showMessageDialog(null,"Orders Catalog Loaded");
 	}
 	
 	public static void loadSalesCatalog(String filePath){
@@ -270,7 +270,7 @@ public class CatalogLoader {
 			}
 		}
 		
-		JOptionPane.showMessageDialog(null,"Load Succesfull!");
+		JOptionPane.showMessageDialog(null,"Sales Catalog Loaded");
 	}
 	
 	public static ArrayList<Hashtable<String, String>> readCatalogFile(String filePath, int catalogType) {
@@ -328,7 +328,7 @@ public class CatalogLoader {
 						outerTag = parentElement;
 					}
 				} else if(cursorInsideElement) {
-					String[] attributeKV = line.split("\\p{Blank}+", 2); //Find the first space or tab and split the string around that.
+					String[] attributeKV = line.split("\\s+", 2); //Find the first space or tab and split the string around that.
 					anElement.put(attributeKV[0].toUpperCase(),attributeKV[1]); //Store the key (attribute tag) in upper case to overcome case differences.
 				}
 				

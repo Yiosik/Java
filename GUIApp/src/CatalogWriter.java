@@ -5,6 +5,8 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
 
+import javax.swing.JOptionPane;
+
 public class CatalogWriter {
 	
 	public static void writeProductsCatalog(Hashtable<Product, Integer> productsCatalog, String filePath){
@@ -33,6 +35,7 @@ public class CatalogWriter {
 		
 		writeCatalogFile(filePath,productData);
 		
+		JOptionPane.showMessageDialog(null,"Products Catalog Saved");
 	}
 	public static void writeOrdersCatalog(ArrayList<Order> ordersCatalog, String filePath){
 		String orderData = "ORDER_LIST\n{\n";
@@ -47,6 +50,7 @@ public class CatalogWriter {
 		
 		writeCatalogFile(filePath,orderData);
 		
+		JOptionPane.showMessageDialog(null,"Orders Catalog Saved");
 	}
 	
 	public static void writeSalesCatalog(ArrayList<Sale> salesCatalog, String filePath){
@@ -62,6 +66,7 @@ public class CatalogWriter {
 		
 		writeCatalogFile(filePath,saleData);
 		
+		JOptionPane.showMessageDialog(null,"Sales Catalog Saved");
 	}
 	
     public static void writeCatalogFile(String filePath, String data) {

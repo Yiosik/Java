@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.GregorianCalendar;
+import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class MainApp {
@@ -226,7 +227,6 @@ public class MainApp {
 				if (choice == JFileChooser.APPROVE_OPTION){
 					String filePath = fileChooser.getSelectedFile().getAbsolutePath();
 					CatalogWriter.writeProductsCatalog(CatalogLoader.productsCatalog, filePath);
-					JOptionPane.showMessageDialog(null,"Save Succesfull!");
 				}
 			}
 		});
@@ -242,7 +242,6 @@ public class MainApp {
 				if (choice == JFileChooser.APPROVE_OPTION){
 					String filePath = fileChooser.getSelectedFile().getAbsolutePath();
 					CatalogWriter.writeOrdersCatalog(CatalogLoader.ordersCatalog, filePath);
-					JOptionPane.showMessageDialog(null,"Save Succesfull!");
 				}
 			}
 		});
@@ -258,7 +257,6 @@ public class MainApp {
 				if (choice == JFileChooser.APPROVE_OPTION){
 					String filePath = fileChooser.getSelectedFile().getAbsolutePath();
 					CatalogWriter.writeSalesCatalog(CatalogLoader.salesCatalog, filePath);
-					JOptionPane.showMessageDialog(null,"Save Succesfull!");
 				}
 			}
 		});
@@ -550,8 +548,16 @@ public class MainApp {
 					String customerName = field1.getText();
 					String customerSurname = field2.getText();
 					String customerPhone = field3.getText();
-					Date orderDate = stringToDate(field4.getText());
-					Date orderETA = stringToDate(field5.getText());
+					String orderDateString = field4.getText();
+					String orderETAString = field5.getText();
+					while(!validateDateInput(orderDateString)) {
+						orderDateString = JOptionPane.showInputDialog("Insert Valid Order Date (dd.MM.YYYY):",JOptionPane.QUESTION_MESSAGE);
+					}
+					while(!validateDateInput(orderETAString)) {
+						orderETAString = JOptionPane.showInputDialog("Insert Valid Order ETA Date (dd.MM.YYYY):",JOptionPane.QUESTION_MESSAGE);
+					}
+					Date orderDate = stringToDate(orderDateString);
+					Date orderETA = stringToDate(orderETAString);
 					Double orderCost = product.getPrice() - (product.getPrice()*product.getDiscount());
 					
 					//Add Sale to Orders' Catalog
@@ -588,19 +594,21 @@ public class MainApp {
 					String customerName = field1.getText();
 					String customerSurname = field2.getText();
 					String customerPhone = field3.getText();
-					String stringDate = field4.getText();
-					stringDate = JOptionPane.showInputDialog("Insert Valid Date (dd.MM.YYYY):",JOptionPane.QUESTION_MESSAGE);
-					Date saleDate = stringToDate(stringDate);
+					String dateString = field4.getText();
+					while(!validateDateInput(dateString)) {
+						dateString = JOptionPane.showInputDialog("Insert Valid Date (dd.MM.YYYY):",JOptionPane.QUESTION_MESSAGE);
+					}
+					Date saleDate = stringToDate(dateString);
 					Double saleCost = product.getPrice() - (product.getPrice()*product.getDiscount());
-					
+
 					//Update Product Catalog
 					CatalogLoader.productsCatalog.put(product, CatalogLoader.productsCatalog.get(product)-1);
 					tabbedPane.setComponentAt(0, makeProductList());
-					
+
 					//Add Sale to Sales' Catalog
 					CatalogLoader.salesCatalog.add(new Sale(CatalogLoader.saleCode,product,customerName,customerSurname,customerPhone,saleDate,saleCost));
 					tabbedPane.setComponentAt(2, makeSaleList());
-					
+
 					//Increment of the sale code
 					CatalogLoader.saleCode++;
 					JOptionPane.showMessageDialog(null, "The final cost is: " + saleCost, "Sale Complete",JOptionPane.INFORMATION_MESSAGE);
@@ -738,12 +746,13 @@ public class MainApp {
 		    });
 		return sortedList;
 	}
-    public static boolean verify(String input) {
-        String text = input;
-        if(text.matches("^([1-9]{1}|1\\d{1}|2\\d{1}|3[01]{1})\\.([1-9]{1}|1[012]{1})\\.2[0-9]{3}$")){
-        	return true;
-        }else{
-        	return false;
+    public static boolean validateDateInput(String input) {
+        boolean isInputValid = false;
+        
+        if(input.matches("^([1-9]{1}|1\\d{1}|2\\d{1}|3[01]{1})\\.([1-9]{1}|1[012]{1})\\.2[0-9]{3}$")){
+        	isInputValid = true;
         }
+        
+        return isInputValid;
     }
 }
